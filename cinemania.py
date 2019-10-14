@@ -9,39 +9,30 @@ with open('movies.json') as json_file:
 
 cadastroFilmes = {}
 while True:
-    #os.system("clear")
     opcao = exibir_menu_principal()
-    print(opcao)
     if opcao == 1:
         os.system("clear")
+        print("================= CADASTRE UM FILME ====================")
         cadastroFilmes = cadastra_filme(data, cadastroFilmes)
-        print(cadastroFilmes)
 
     elif opcao == 2:
         os.system("clear")
-        print("Filmes cadastrados")
+        print("================= FILMES CADASTRADOS ====================")
         imprime_filmes_cadastrados(cadastroFilmes)
 
     elif opcao == 3:
         os.system("clear")
-        print("Interval Partitioning")
+        print("========== Disposição de salas para exibir todos os filmes cadastrados ================")
         filmesOrdenadosHorarioInicio = sorted(cadastroFilmes.items(), key = lambda i: i[1]['horarioInicio']) 
-        print(filmesOrdenadosHorarioInicio)
-        cntdSalas = 0
-        salas = []
-        # salas['1'] = {}
-        # salas['1'][filmesOrdenadosHorarioInicio[0][0]] = [filmesOrdenadosHorarioInicio[0][1]['horarioInicio'], filmesOrdenadosHorarioInicio[0][1]['horarioTermino']]
-        # print(salas)
-
-        executa_interval_partioning(filmesOrdenadosHorarioInicio, salas, cntdSalas)
+        salas = [0]
+        executa_interval_partitioning(filmesOrdenadosHorarioInicio, salas)
 
 
     elif opcao == 4:
         os.system("clear")
-        print("Aproveite o máximo de sua experiência no Cinemania")
-        print("Lista de filmes que você consegue assistir hoje:")
+        print("Aproveite o máximo de sua experiência no Cinemania!\n")
+        print("Lista de filmes que você consegue assistir hoje:\n")
         filmesOrdenadosHorarioTermino = sorted(cadastroFilmes.items(), key = lambda i: i[1]['horarioTermino']) 
-        # print(filmesOrdenadosHorarioTermino)
         executa_interval_sheduling(filmesOrdenadosHorarioTermino)
 
     else:

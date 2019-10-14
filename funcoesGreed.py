@@ -1,5 +1,4 @@
 import re
-from pqdict import pqdict
 
 def exibir_menu_principal():
     print('Bem vindo ao Cinemania')
@@ -19,8 +18,6 @@ def valida_opcao(opcao):
     return opcao
 
 def cadastra_filme(data, cadastroFilmes):
-    print("Cadastro Inicial")
-    print(cadastroFilmes)
     nome = str(input('Digite o nome do filme: '))
     duracao, diretor, classificacao, genero, ano = retorna_dados(data, nome)
     if duracao == None:
@@ -61,7 +58,7 @@ def cadastra_filme(data, cadastroFilmes):
         cadastroFilmes[nome.upper()]['minutoTermino'] = minutosTermino
         cadastroFilmes[nome.upper()]['horarioTermino'] = int(str(horaTermino) + str(minutosTermino))
 
-        print('Filme cadastrado com sucesso')
+        print('\nFilme cadastrado com sucesso!\n\n')
         return cadastroFilmes
 
 
@@ -73,16 +70,17 @@ def retorna_dados(json_object, nome):
 
 def imprime_filmes_cadastrados(cadastroFilmes):
     ctd = 0
+    
     for filme in cadastroFilmes:
         ctd += 1
-        print("\nFilme ", ctd)
+        print("Filme ", ctd)
         print("Nome: ", filme)
-        print("Gênero: ", filme[filme]['genero'])
-        print("Ano: ", filme[filme]['ano'])
-        print("Clasificação: ", filme[filme]['classificacao'])
-        print("Diretor: ", filme[filme]['diretor'])
-        print("Duração: ", filme[filme]['duracao'])
-        print("Horário de início da sessão: " + filme[filme]['horaInicio'] + ":" + filme[filme]['minutosInicio'])
+        print("Gênero: ", cadastroFilmes[filme]['genero'])
+        print("Ano: ", cadastroFilmes[filme]['ano'])
+        print("Clasificação: ", cadastroFilmes[filme]['classificacao'])
+        print("Diretor: ", cadastroFilmes[filme]['diretor'])
+        print("Duração: ", cadastroFilmes[filme]['duracao'])
+        print("Horário de início da sessão: " + cadastroFilmes[filme]['horaInicio'] + ":" + cadastroFilmes[filme]['minutosInicio'])
         print("========================================================================================\n")
 
 
@@ -94,7 +92,7 @@ def executa_interval_sheduling(filmesOrdenadosHorarioTermino):
         if(horarioUltimoFilmeAdicionado <= int(filme[1]['horarioInicio'])):
             horarioUltimoFilmeAdicionado = filme[1]['horarioTermino']
             nFilmes += 1
-            print("\nFilme ", nFilmes)
+            print("Filme ", nFilmes)
             print("Nome: ", filme[0])
             print("Gênero: ", filme[1]['genero'])
             print("Ano: ", filme[1]['ano'])
@@ -106,48 +104,20 @@ def executa_interval_sheduling(filmesOrdenadosHorarioTermino):
            
 
 
-def executa_interval_partioning(filmesOrdenadosHorarioInicio, salas, cntdSalas):
-    salas.insert(0, filmesOrdenadosHorarioInicio[0][1]['horarioTermino']) 
-    print(salas)
-    print("\nSala 1 ")
-    print("Nome: ", filmesOrdenadosHorarioInicio[0][0])
-    print("Gênero: ", filmesOrdenadosHorarioInicio[0][1]['genero'])
-    print("Ano: ", filmesOrdenadosHorarioInicio[0][1]['ano'])
-    print("Clasificação: ", filmesOrdenadosHorarioInicio[0][1]['classificacao'])
-    print("Diretor: ", filmesOrdenadosHorarioInicio[0][1]['diretor'])
-    print("Duração: ", filmesOrdenadosHorarioInicio[0][1]['duracao'])
-    print("Horário de início da sessão: " + filmesOrdenadosHorarioInicio[0][1]['horaInicio'] + ":" + filmesOrdenadosHorarioInicio[0][1]['minutosInicio'])
-    print("========================================================================================\n")
-           
-    # filmesOrdenadosHorarioInicio.pop(0)
-    print(filmesOrdenadosHorarioInicio)
-
+def executa_interval_partitioning(filmesOrdenadosHorarioInicio, salas):
     for filme in filmesOrdenadosHorarioInicio:
-        print('AQUIIIIIIIIII',filmesOrdenadosHorarioInicio)
-        # filmesOrdenadosHorarioInicio.pop(0)
-        ctd = 1
         if(filme[1]['horarioInicio'] > min(salas)):
-            print("\nSala  ", salas.index(min(salas)) + 1)
-            print("Nome: ", filme[0])
-            print("Gênero: ", filme[1]['genero'])
-            print("Ano: ", filme[1]['ano'])
-            print("Clasificação: ", filme[1]['classificacao'])
-            print("Diretor: ", filme[1]['diretor'])
-            print("Duração: ", filme[1]['duracao'])
-            print("Horário de início da sessão: " + filme[1]['horaInicio'] + ":" + filme[1]['minutosInicio'])
-            print("========================================================================================\n")
+            print("Sala  ", salas.index(min(salas)) + 1)
             salas[salas.index(min(salas))] = filme[1]['horarioTermino']
-            # filmesOrdenadosHorarioInicio.pop(0)
         else:
-            print("\nSala  ", len(salas) + 1)
-            print("Nome: ", filme[0])
-            print("Gênero: ", filme[1]['genero'])
-            print("Ano: ", filme[1]['ano'])
-            print("Clasificação: ", filme[1]['classificacao'])
-            print("Diretor: ", filme[1]['diretor'])
-            print("Duração: ", filme[1]['duracao'])
-            print("Horário de início da sessão: " + filme[1]['horaInicio'] + ":" + filme[1]['minutosInicio'])
-            print("========================================================================================\n")
-            salas.append(filme[1]['horarioTermino']) 
-            # filmesOrdenadosHorarioInicio.pop(0)    
+            print("Sala  ", len(salas) + 1)
+            salas.append(filme[1]['horarioTermino'])  
 
+        print("Nome: ", filme[0])
+        print("Gênero: ", filme[1]['genero'])
+        print("Ano: ", filme[1]['ano'])
+        print("Clasificação: ", filme[1]['classificacao'])
+        print("Diretor: ", filme[1]['diretor'])
+        print("Duração: ", filme[1]['duracao'])
+        print("Horário de início da sessão: " + filme[1]['horaInicio'] + ":" + filme[1]['minutosInicio'])
+        print("========================================================================================\n")
