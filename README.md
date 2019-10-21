@@ -1,7 +1,7 @@
-# NomedoProjeto
+# Cinemania
 
 **Número da Lista**: 3<br>
-**Conteúdo da Disciplina**: Algoritmos Ambiciosos<br>
+**Conteúdo da Disciplina**: Algoritimos ambiciosos<br>
 
 ## Alunos
 |Matrícula | Aluno |
@@ -10,22 +10,34 @@
 | 16/0012961  |  Lucas Arthur Lermen |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
-
-## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+<p align="justify">Essa lista consiste de um menu que permite o cadastro de diversos filmes na programação utilizando o dataset  <a href="https://www.kaggle.com/danielgrijalvas/movies/version/1">Movie Industry</a>. Após o cadastro, pode ser escolhida uma opção para organizar todos os filmes em diferentes salas de exibição, ou apresentar a maior quantidade de filmes que um espectador consegue assistir.
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
 
+**Linguagem**: Python v3.6 ou superior <br>
+
+### Executando o projeto
+
+#### Pré-requisitos
+
+``` console
+$ pip3 install pandas
+```
+
+#### Comandos para executar
+
+``` console
+$ python3 cinemania.py
+
+```
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+Ao executar o comando será inicializado um menu com 5 opções
+1 - Cadastrar filme
+2 - Ver filmes cadastrados
+3 - Visualizar número de salas necessárias para exibição
+4 - Número máximo de filmes que uma pessoa consegue assistir por dia
+0 - Sair
 
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
-
-
+Caso deseje cadastrar um filme presente no dataset, selecione a opção 1. Ao selecionar a opção 2, lhe será apresentado uma lista com todos os filmes cadastrados. A opção 3 apresenta como os filmes ficariam dispostos a fim de  todos serem apresentados com o menor número possível de salas(Interval Partitioning). Já a opção 4, apresenta o maior número de filmes que uma pessoa consegue assistir de acordo com os filmes cadastrados(Interval Scheduling)
 
 
